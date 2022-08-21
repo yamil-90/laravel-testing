@@ -15,12 +15,7 @@ class OrderTest extends TestCase
      */
     public function an_oder_contains_products()
     {
-        $order = new Order;
-        $product1 = new Product('batteries', 2);
-        $product2 = new Product('spoon', 4);
-
-        $order->add($product1);
-        $order->add($product2);
+        $order = $this->createOrderWithProducts();
 
         $this->assertCount(2, $order->products());
     }
@@ -32,6 +27,13 @@ class OrderTest extends TestCase
     **/
     public function an_order_can_calculate_the_total_cost_of_the_products()
     {
+        $order = $this->createOrderWithProducts();
+
+        $this->assertEquals(6, $order->total());
+    }
+
+    private function createOrderWithProducts()
+    {
         $order = new Order;
         $product1 = new Product('batteries', 2);
         $product2 = new Product('spoon', 4);
@@ -39,6 +41,6 @@ class OrderTest extends TestCase
         $order->add($product1);
         $order->add($product2);
 
-        $this->assertEquals(6, $order->total());
+        return $order;
     }
 }

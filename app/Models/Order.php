@@ -38,12 +38,14 @@ class Order extends Model
     **/
     public function total()
     {
-        $total = 0;
+        // $total = 0;
 
-        foreach($this->products as $product){
-            $total += $product->cost();
-        }
-        return $total;
+        // foreach($this->products as $product){
+        //     $total += $product->cost();
+        // }
+        // return $total;
+        
+        return array_reduce($this->products, fn($carry, $product)=> $carry += $product->cost());
     }
 
 
