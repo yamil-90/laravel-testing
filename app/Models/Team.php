@@ -82,7 +82,7 @@ class Team extends Model
     **/
     private function guardAgainstTooManyMembers($users)
     {
-        $numberUsersToAdd = $users instanceof User ? 1 : $users->count();
+        $numberUsersToAdd = $users instanceof User ? 1 : count($users);
         if($this->count() + $numberUsersToAdd > $this->size){
             throw new Exception();
         }
